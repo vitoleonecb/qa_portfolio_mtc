@@ -1,0 +1,39 @@
+{
+  "valid_user": {
+    "email": "test@example.com",
+    "password": "ValidPass1!",
+    "username": "testuser123",
+    "user_type": "user",
+    "is_admin": false
+  },
+  "admin_user": {
+    "email": "admin@example.com",
+    "password": "AdminPass1!",
+    "username": "adminuser",
+    "user_type": "admin",
+    "is_admin": true
+  },
+  "second_user": {
+    "email": "test2@example.com",
+    "password": "ValidPass1!",
+    "username": "testuser456",
+    "user_type": "user",
+    "is_admin": false
+  },
+  "non_existent_user": {
+    "email": "ghost@example.com",
+    "password": "anything"
+  },
+  "registration_data": {
+    "email": "newuser@example.com",
+    "password": "NewUserPass1!",
+    "username": "newuser789",
+    "first_name": "Test",
+    "last_name": "User"
+  },
+  "invalid_credentials": {
+    "wrong_password": { "email": "test@example.com", "password": "WrongPassword" },
+    "empty_fields": { "email": "", "password": "" },
+    "whitespace_email": { "email": "  test@example.com  ", "password": "ValidPass1!" }
+  }
+}

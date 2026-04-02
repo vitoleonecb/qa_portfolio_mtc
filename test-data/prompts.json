@@ -1,0 +1,51 @@
+{
+  "multiple_choice": {
+    "prompt_template_id": 1,
+    "config": {
+      "question": "What aspect of theater interests you most?",
+      "options": ["Acting", "Directing", "Writing", "Stage Design"]
+    },
+    "sample_response": {
+      "selected": "Acting"
+    }
+  },
+  "checklist": {
+    "prompt_template_id": 3,
+    "config": {
+      "question": "Select all that apply:",
+      "options": ["Improv", "Monologue", "Ensemble", "Movement"]
+    },
+    "sample_response": {
+      "checked": ["Improv", "Movement"]
+    }
+  },
+  "short_response": {
+    "prompt_template_id": 4,
+    "config": {
+      "question": "Describe your experience with theater."
+    },
+    "sample_response": {
+      "text": "I have participated in community theater for three years."
+    }
+  },
+  "drag_and_drop": {
+    "prompt_template_id": 6,
+    "config": {
+      "question": "Rank these in order of preference:",
+      "items": ["Comedy", "Drama", "Musical", "Experimental"]
+    },
+    "sample_response": {
+      "order": ["Musical", "Comedy", "Drama", "Experimental"]
+    }
+  },
+  "rating": {
+    "prompt_template_id": 7,
+    "config": {
+      "question": "Rate your comfort with improvisation:",
+      "scale": 5
+    },
+    "sample_response": {
+      "rating": 4
+    }
+  }
+}

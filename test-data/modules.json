@@ -1,0 +1,21 @@
+{
+  "workshop_id": 50,
+  "valid_module": {
+    "workshop_module_name": "Test Module"
+  },
+  "valid_statuses": ["pending", "open", "processing", "completed"],
+  "invalid_statuses": ["banana", "active", "closed", "", 123],
+  "prompt_templates": {
+    "multiple_choice": { "prompt_template_id": 1, "auto_accept": true },
+    "checklist": { "prompt_template_id": 3, "auto_accept": true },
+    "short_response": { "prompt_template_id": 4, "auto_accept": false },
+    "drag_and_drop": { "prompt_template_id": 6, "auto_accept": true },
+    "sample_rater": { "prompt_template_id": 7, "auto_accept": true },
+    "script_notation": { "prompt_template_id": 8, "auto_accept": false },
+    "dropdown": { "prompt_template_id": 9, "auto_accept": true }
+  },
+  "sample_response": {
+    "workshop_response_content": { "selected": "Option A" },
+    "prompt_template_id": 1
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "valid_settings": {
+    "channel": "email",
+    "module_open": true,
+    "last_day_reminder": true,
+    "materials_ready": true,
+    "workshop_rsvp": true,
+    "showcase_announcements": true,
+    "showcase_ticket": true
+  },
+  "disabled_settings": {
+    "channel": "none",
+    "module_open": false,
+    "last_day_reminder": false,
+    "materials_ready": false,
+    "workshop_rsvp": false,
+    "showcase_announcements": false,
+    "showcase_ticket": false
+  },
+  "valid_channels": ["none", "email", "sms", "both"],
+  "invalid_channels": ["telegram", "push", "", 123],
+  "invalid_sub_options": {
+    "string_instead_of_boolean": { "channel": "email", "module_open": "yes" },
+    "number_instead_of_boolean": { "channel": "email", "module_open": 1 }
+  }
+}
