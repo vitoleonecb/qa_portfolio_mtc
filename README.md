@@ -2,6 +2,8 @@
 
 ISTQB-certified QA Engineer with hands-on experience testing a real full-stack web application across authentication, module lifecycle, and async notification systems.
 
+Full web app code repo available upon request.
+
 ---
 
 ## Start Here
