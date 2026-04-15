@@ -147,14 +147,12 @@ curl -X PUT http://localhost:3036/api/workshops/50/modules/77 \
 
 ## Actual Result
 - API returns success response (`200` or `201`)
-- Database is updated with invalid value (`"banana"`)
 - UI behavior becomes inconsistent or module may not appear in expected status grouping
 
 ---
 
 ## Evidence
 - API response showing successful update with invalid value
-- Database query confirming invalid status persisted
 - Screenshot: `../reports/TC-MOD-007.png`
 
 ---
