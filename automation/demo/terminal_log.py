@@ -19,10 +19,46 @@ can assert that defensive-validation scenes actually fired.
 
 from __future__ import annotations
 
+import re
 import sys
 import time
 from dataclasses import dataclass, field
 from typing import Optional
+
+# --- Snippet sanitization ------------------------------------------------
+# Anything printed next to request lines is visible in the screen recording,
+# so we proactively redact auth material and PII from response bodies before
+# they reach the terminal. This is a belt-and-suspenders layer: even if a new
+# response format surfaces a token or email, the recording stays clean.
+
+_REDACT_PATTERNS = [
+    # JSON string fields we never want rendered in plain text.
+    (re.compile(r'("accessToken"\s*:\s*")[^"]+(")'), r"\1<redacted>\2"),
+    (re.compile(r'("token"\s*:\s*")[^"]+(")'), r"\1<redacted>\2"),
+    (re.compile(r'("refreshToken"\s*:\s*")[^"]+(")'), r"\1<redacted>\2"),
+    (re.compile(r'("email"\s*:\s*")[^"]+(")'), r"\1<redacted>\2"),
+    (re.compile(r'("username"\s*:\s*")[^"]+(")'), r"\1<redacted>\2"),
+    (re.compile(r'("phone"\s*:\s*")[^"]+(")'), r"\1<redacted>\2"),
+    (re.compile(r'("first_name"\s*:\s*")[^"]+(")'), r"\1<redacted>\2"),
+    (re.compile(r'("last_name"\s*:\s*")[^"]+(")'), r"\1<redacted>\2"),
+    # Bare JWT strings that slipped through (header.payload[.sig]).
+    (re.compile(r"eyJ[A-Za-z0-9_\-]+\.eyJ[A-Za-z0-9_\-]+(?:\.[A-Za-z0-9_\-]+)?"), "<jwt-redacted>"),
+    # Free-form email addresses outside JSON quotes.
+    (
+        re.compile(r"[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}"),
+        "<email-redacted>",
+    ),
+]
+
+
+def sanitize_snippet(text: Optional[str]) -> Optional[str]:
+    """Strip tokens, emails, usernames, and raw JWTs from a response snippet."""
+    if not text:
+        return text
+    out = text
+    for pattern, replacement in _REDACT_PATTERNS:
+        out = pattern.sub(replacement, out)
+    return out
 
 
 # --- ANSI helpers ---------------------------------------------------------
@@ -149,7 +185,8 @@ class TerminalLog:
         self._write(" ".join(parts))
 
         if snippet:
-            trimmed = snippet.strip().replace("\n", " ")
+            cleaned = sanitize_snippet(snippet) or ""
+            trimmed = cleaned.strip().replace("\n", " ")
             if len(trimmed) > 160:
                 trimmed = trimmed[:157] + "..."
             self._write(f"        {self._c(DIM, '↳')} {self._c(FG_GREY, trimmed)}")
