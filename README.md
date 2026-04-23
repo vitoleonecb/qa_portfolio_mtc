@@ -10,20 +10,24 @@ Full web app code repo available upon request.
 
 If you only review one part of this portfolio, start with:
 
-1. **Auth Test Execution (Round 1 → Round 2)**
+1. **90-Second QA Demo (Playwright + requests + pytest)**
+   - [`docs/demo-walkthrough.md`](docs/demo-walkthrough.md) · source in [`automation/demo/`](automation/demo/)  
+   Dual-browser scripted walkthrough that exercises frontend validation, backend 400s, a known IDOR finding (`BUG-NOTIF-003`), and session cleanup. Every API call is mirrored to a colorized terminal log so the whole story reads on one screen.
+
+2. **Auth Test Execution (Round 1 → Round 2)**
    - [`test-execution/auth-execution-round-1.md`](test-execution/auth-execution-round-1.md)
    - [`test-execution/auth-execution-round-2.md`](test-execution/auth-execution-round-2.md)  
    Shows full QA workflow: baseline testing → identified observability gaps → backend instrumentation → re-validation with stronger evidence
 
-2. **Observability Improvements**
+3. **Observability Improvements**
    - [`artifacts/observability-improvements.md`](artifacts/observability-improvements.md)  
    Backend instrumentation added to improve testability and verification confidence
 
-3. **Authentication Test Plan**
+4. **Authentication Test Plan**
    - [`docs/test-plans/auth-test-plan.md`](docs/test-plans/auth-test-plan.md)  
    Scope, risk analysis, entry/exit criteria, and execution strategy
 
-4. **Test Cases**
+5. **Test Cases**
    - [`test-cases/auth/`](test-cases/auth/)  
    Structured test design with expected results, actual results, and evidence references
 
@@ -91,6 +95,7 @@ Documented defects with reproducible steps, expected vs. actual results, severit
 Implemented automation using:
 - **Python + `requests`** — API test scripts for auth, modules, and notification endpoints
 - **Playwright (Python)** — UI test specs for authentication flows, module interactions, and notification settings
+- **90-second scripted demo** — orchestrator in `automation/demo/` that drives the UI and API in parallel with a colorized terminal log; walkthrough in [`docs/demo-walkthrough.md`](docs/demo-walkthrough.md)
 
 ---
 
@@ -98,21 +103,31 @@ Implemented automation using:
 
 ```
 qa_portfolio_mtc/
-├── docs/                    # Test strategy, environment setup, traceability matrix
-│   └── test-plans/          # Per-feature test plans (auth, modules, notifications)
-├── test-cases/              # Structured test cases by feature
+├── docs/                      # Test strategy, env setup, traceability matrix, demo walkthrough
+│   ├── demo-walkthrough.md    # 90-second demo scene timeline, bugs exercised, how to run
+│   ├── environment-setup.md
+│   ├── test-strategy.md
+│   ├── traceability-matrix.md
+│   └── test-plans/            # Per-feature test plans (auth, modules, notifications)
+├── test-cases/                # Structured test cases by feature
 │   ├── auth/
 │   ├── modules/
 │   └── notifications/
-├── test-execution/          # Execution reports with metrics and findings
-├── bug-reports/             # Defect documentation by severity
-├── artifacts/               # Observability improvements, AI usage documentation
-├── automation/              # API and UI automation scripts (Python)
-│   ├── api/                 # requests + pytest
-│   └── playwright/          # Playwright + pytest
-├── test-data/               # Test fixtures (users, modules, notifications, prompts)
-├── templates/               # Reusable templates for test artifacts
-└── reports/                 # Screenshots and execution evidence
+├── test-execution/            # Execution reports with metrics and findings
+├── bug-reports/               # Defect documentation by severity
+├── artifacts/                 # Observability improvements, AI usage documentation
+├── automation/                # API and UI automation scripts (Python)
+│   ├── conftest.py            # Shared config / .env loader for all automation
+│   ├── api/                   # requests + pytest — auth, modules, notifications
+│   ├── playwright/            # Playwright + pytest — UI specs for each feature area
+│   └── demo/                  # 90s Playwright + requests + pytest demo orchestrator
+│       ├── demo_runner.py     # 9-scene side-by-side browser + API walkthrough
+│       ├── terminal_log.py    # ANSI-colorized scene / request / bug logger
+│       ├── test_demo.py       # pytest wrapper asserting duration + defensive errors
+│       └── README.md          # Quick-start + env overrides for the demo
+├── test-data/                 # Test fixtures (users, modules, notifications, prompts)
+├── templates/                 # Reusable templates for test artifacts
+└── reports/                   # Screenshots and execution evidence
 ```
 
 ---
