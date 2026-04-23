@@ -11,7 +11,7 @@ Full web app code repo available upon request.
 If you only review one part of this portfolio, start with:
 
 1. **90-Second QA Demo (Playwright + requests + pytest)**
-   - ▶ [Watch the demo (YouTube, 1:30)](https://youtu.be/H5kjS0CREKc)
+   - ▶ [Watch the demo (YouTube, 1:30)](https://youtu.be/4KXqyy3NryY)
    - [`docs/demo-walkthrough.md`](docs/demo-walkthrough.md) · source in [`automation/demo/`](automation/demo/)  
    Dual-browser scripted walkthrough that exercises frontend validation, backend 400s, a known IDOR finding (`BUG-NOTIF-003`), and session cleanup. Every API call is mirrored to a colorized terminal log so the whole story reads on one screen.
 

@@ -1,6 +1,6 @@
 # 90-Second QA Demo Walkthrough
 
-▶ **[Watch the recorded demo on YouTube (1:30)](https://youtu.be/H5kjS0CREKc)**
+▶ **[Watch the recorded demo on YouTube (1:30)](https://youtu.be/4KXqyy3NryY)**
 
 A self-running, ~90-second scripted walkthrough of the application designed to be screen-recorded alongside a live terminal. It combines **Playwright** (headed Chromium) for the UI, **`requests`** for out-of-band API calls, and **`pytest`** as an optional entrypoint — reusing the same configuration and patterns as the rest of the portfolio automation.
 
