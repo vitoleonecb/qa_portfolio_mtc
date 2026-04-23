@@ -6,6 +6,7 @@
   - [`mod-execution-round1.md`](../../test-execution/mod-execution-round1.md)
 - Bug Reports: [`bug-reports/`](../../bug-reports/)
 - Templates: [`test-case-template.md`](../../templates/test-case-template.md)
+- Supplemental Plan (Round 2 coverage of lifecycle timing + role-based UX): [`modules-lifecycle-ux-test-plan.md`](modules-lifecycle-ux-test-plan.md)
 
 ---
 
@@ -60,6 +61,7 @@ Associated test case files:
 - `test-cases/modules/module-submission.md`
 - `test-cases/modules/module-ui-and-progress.md`
 - `test-cases/modules/modules-overview.md`
+- `test-cases/modules/module-lifecycle-role-ux.md` (Round 2 — supplemental lifecycle + role UX coverage)
 
 ### Out of Scope
 - Full regression of every module edge case
@@ -200,6 +202,7 @@ The following test data is required:
 | Status Transitions | test-cases/modules/module-status-transitions.md | mod-execution-round1.md | bug-reports/major.md |
 | Submission | test-cases/modules/module-submission.md | mod-execution-round1.md | bug-reports/... |
 | UI and Progress | test-cases/modules/module-ui-and-progress.md | mod-execution-round1.md | bug-reports/... |
+| Lifecycle + Role UX (Round 2) | test-cases/modules/module-lifecycle-role-ux.md | (planned) | (pending) |
 
 ---
 
