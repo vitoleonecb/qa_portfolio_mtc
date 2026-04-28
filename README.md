@@ -32,6 +32,11 @@ If you only review one part of this portfolio, start with:
    - [`test-cases/auth/`](test-cases/auth/)  
    Structured test design with expected results, actual results, and evidence references
 
+6. **AI Output Testing**
+   - [`test-cases/ai/ai-analysis.md`](test-cases/ai/ai-analysis.md) — 15 prioritized cases for the per-prompt AI analysis pipeline; opens with a suspected bug where AI runs against every template instead of just the three free-response ones (4, 6, 8).
+   - [`docs/ai-testing-methodology.md`](docs/ai-testing-methodology.md) — six personas (theater-familiar, novice, returning subscriber, showcase-only audience, facilitator/admin, curious guest), a 0/1/2 rubric incl. product dimensions (Welcoming Tone, Sense of Influence, Persona Fit), three inline golden-set fixtures, and a checklist for testing future AI features.
+   - [`automation/seed_month_cycle/`](automation/seed_month_cycle/) — Node orchestrator that uses an LLM to fabricate a month of theme/workshops/modules/prompts/participants/responses and drives the real API in cycle order, compressing four weekly cycles into ~60 min of wall clock. Per-call-type LLM tuning (temperature, top_p, presence/frequency penalty, max_tokens, seed) at the top of `seed_month_cycle.mjs`.
+
 ### What to Look For
 
 - Identification of inconclusive test results due to missing backend observability
@@ -113,7 +118,8 @@ qa_portfolio_mtc/
 ├── test-cases/                # Structured test cases by feature
 │   ├── auth/
 │   ├── modules/
-│   └── notifications/
+│   ├── notifications/
+│   └── ai/                    # AI analysis pipeline (template gating bug, schema, safety, product rubric)
 ├── test-execution/            # Execution reports with metrics and findings
 ├── bug-reports/               # Defect documentation by severity
 ├── artifacts/                 # Observability improvements, AI usage documentation
@@ -121,11 +127,16 @@ qa_portfolio_mtc/
 │   ├── conftest.py            # Shared config / .env loader for all automation
 │   ├── api/                   # requests + pytest — auth, modules, notifications
 │   ├── playwright/            # Playwright + pytest — UI specs for each feature area
-│   └── demo/                  # 90s Playwright + requests + pytest demo orchestrator
-│       ├── demo_runner.py     # 9-scene side-by-side browser + API walkthrough
-│       ├── terminal_log.py    # ANSI-colorized scene / request / bug logger
-│       ├── test_demo.py       # pytest wrapper asserting duration + defensive errors
-│       └── README.md          # Quick-start + env overrides for the demo
+│   ├── demo/                  # 90s Playwright + requests + pytest demo orchestrator
+│   │   ├── demo_runner.py     # 9-scene side-by-side browser + API walkthrough
+│   │   ├── terminal_log.py    # ANSI-colorized scene / request / bug logger
+│   │   ├── test_demo.py       # pytest wrapper asserting duration + defensive errors
+│   │   └── README.md          # Quick-start + env overrides for the demo
+│   └── seed_month_cycle/      # Month-in-an-hour LLM-driven simulation (Node ESM)
+│       ├── seed_month_cycle.mjs   # config block + phases (theme → cycle → responses)
+│       ├── lib/                   # api / openai / schemas helpers
+│       ├── reports/               # per-run JSON reports + rubric checklist
+│       └── README.md              # runbook: prereqs, dry-run, cost rough-cut, teardown
 ├── test-data/                 # Test fixtures (users, modules, notifications, prompts)
 ├── templates/                 # Reusable templates for test artifacts
 └── reports/                   # Screenshots and execution evidence
@@ -139,6 +150,7 @@ qa_portfolio_mtc/
 - **Missing input validation** — Module status endpoint accepted arbitrary values, risking data integrity ([bug report](bug-reports/major.md))
 - **Auth state not invalidated** — Expired JWT sessions left the UI in an authenticated state ([bug report](bug-reports/critical.md))
 - **Notification flood** — Simultaneous module opens produced redundant per-module emails instead of aggregated notifications ([bug report](bug-reports/minor.md))
+- **AI analysis fans out to all templates** — Backend enqueues an AI job for every prompt template instead of just the three free-response ones (4, 6, 8), wasting OpenAI calls and producing meaningless rows ([test cases](test-cases/ai/ai-analysis.md))
 - **Observability gaps** — Round 1 testing identified areas where API responses alone were insufficient to verify backend behavior, leading to targeted instrumentation improvements
 
 ---
