@@ -1,8 +1,6 @@
 # QA Portfolio — Full-Stack Application Testing
 
-ISTQB-certified QA Engineer with hands-on experience testing a real full-stack web application across authentication, module lifecycle, and async notification systems.
-
-Full web app code repo available upon request.
+ISTQB-certified QA Engineer with hands-on experience testing and troubleshooting a real full-stack web application across authentication, module lifecycle, and async notification systems.
 
 ---
 
